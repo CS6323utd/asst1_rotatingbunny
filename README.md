@@ -21,7 +21,7 @@ brew install cmake
 
 To build your code for this assignment:
 ```
-$ cd asst0_environment && mkdir build && cd build
+$ cd asst1_rotatingbunny && mkdir build && cd build
 $ cmake ..
 $ make
 ```
@@ -39,7 +39,13 @@ $ ./helloworld
 
 When you first run the application, you will see a bunny on a plane with axis on GUI.
 
-<img src="" width="300" height="300">
+<img src="https://github.com/CS6323utd/asst1_rotatingbunny/blob/master/demo/bunny.png" width="500" height="300">
+
+### What You Need to Do
+Please refer to the [PDF](https://github.com/CS6323utd/asst1_rotatingbunny/blob/master/CS_6323.001_Assignment1.pdf) about what you need to do for this assignment.
+
+
+--- 
 
 ## FAQ / Dependencies / Troubleshooting
 
@@ -104,8 +110,14 @@ $ brew install glfw3
 ######## OPTIONAL ######## 
 ```
 
+## Resources and Notes
+
+- [Rasterization Rules in Direct3D 11](https://msdn.microsoft.com/en-us/library/windows/desktop/cc627092(v=vs.85).aspx)
+- [Rasterization in OpenGL 4.0](https://www.opengl.org/registry/doc/glspec40.core.20100311.pdf#page=156)
+- [Bryce Summer's C++ Programming Guide](https://github.com/Bryce-Summers/Writings/blob/master/Programming%20Guides/C_plus_plus_guide.pdf)
+- [NeHe OpenGL Tutorials Lessons 01~05](http://nehe.gamedev.net/tutorial/lessons_01__05/22004/)
 
 ## Acknowledge
 
-This repo also use **DownloadProject** (https://github.com/Crascit/DownloadProject) for downloading and configuring NanoGUI (including GLFW). 
+This repo also use **DownloadProject** (https://github.com/Crascit/DownloadProject) for downloading and configuring NanoGUI (including GLFW) and GLM. 
 
