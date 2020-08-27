@@ -87,15 +87,15 @@ export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/Cellar/glew/2.1.0_1/lib/"
 
 If you want to use system GLEW, you can run following command to install GLEW then update CMakeLists.txt ON YOUR OWN.
 ```
-######## OPTIONAL ######## 
+######## OPTIONAL ########
 $ brew install glew
 # remember to update CMakeLists.txt
-######## OPTIONAL ######## 
+######## OPTIONAL ########
 ```
 
 #### 3. NanoGUI
 
-We setup these dependencies in our cmake/*.cmake files, therefore, you **DO NOT** need to do anything about it.
+We setup these dependencies in our cmake/modules/*.cmake files, therefore, you **DO NOT** need to do anything about it.
 
 
 #### 4. GLFW
@@ -104,10 +104,23 @@ We will use the GLFW provided in NanoGUI, therefore, you **DO NOT** need to do a
 
 However, If you want to use system GLFW, you can run following command to install GLFW then update CMakeLists.txt ON YOUR OWN.
 ```
-######## OPTIONAL ######## 
+######## OPTIONAL ########
 $ brew install glfw3
 # remember to update CMakeLists.txt
-######## OPTIONAL ######## 
+######## OPTIONAL ########
+```
+
+#### GLM
+
+We setup these dependencies in our cmake/modules/*.cmake files, therefore, you **DO NOT** need to do anything about it.
+
+
+However, If you want to use system GLM, you can run following command to install GLM then update CMakeLists.txt ON YOUR OWN.
+```
+######## OPTIONAL ########
+$ brew install glm
+# remember to update CMakeLists.txt
+######## OPTIONAL ########
 ```
 
 ## Resources and Notes
