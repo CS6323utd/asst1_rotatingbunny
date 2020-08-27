@@ -21,19 +21,19 @@ link_directories(
     ${GLFW_LIBRARY_DIRS}
 )
 
-# Set helloworld source
-set(CMU462_helloworld_SOURCE
+# Set app source
+set(APP_SOURCE
     Animation.cpp
     Renderer.cpp
     main.cpp
 )
 
 if (WIN32)
-    list(APPEND CMU462_helloworld_SOURCE dirent/dirent.c)
+    list(APPEND APP_SOURCE dirent/dirent.c)
 endif(WIN32)
 
-# Set helloworld header
-set(CMU462_helloworld_HEADER
+# Set app header
+set(APP_HEADER
     Animation.h
     Camera.h
     Lighting.h
@@ -42,23 +42,16 @@ set(CMU462_helloworld_HEADER
     Shader.h
 )
 
-# Import hardware renderer
-# option(helloworld_BUILD_HARDWARE_RENDERER  "Build hardware implementation"  ON)
-# include(hardware/hardware.cmake)
-
-# Import helloworld reference
-# include(reference/reference.cmake)
-
 #-------------------------------------------------------------------------------
 # Add executable
 #-------------------------------------------------------------------------------
-add_executable( helloworld
-    ${CMU462_helloworld_SOURCE}
-    ${CMU462_helloworld_HEADER}
+add_executable( asst1
+    ${APP_SOURCE}
+    ${APP_HEADER}
 )
 
-# Link helloworld executable (static link reference solution)
-target_link_libraries( helloworld
+# Link asst1 executable (static link reference solution)
+target_link_libraries( asst1
     nanogui ${NANOGUI_EXTRA_LIBS}
     ${OPENGL_LIBRARIES}
     glew ${GLEW_LIBRARIES}
@@ -68,13 +61,13 @@ target_link_libraries( helloworld
 
 
 if (APPLE) # Frameworks required on osx
-  target_link_libraries(helloworld  
+  target_link_libraries(asst1  
     ${COCOA_LIBRARIES}
     ${IOKIT_LIBRARIES}
     ${COREVIDEO_LIBRARIES}
   )
 else(UNIX)  #LINUX
-target_link_libraries( helloworld
+target_link_libraries( asst1
     ${GLEW_LIBRARIES}
     ${GLFW_LIBRARIES}
     ${OPENGL_LIBRARIES}
@@ -98,4 +91,4 @@ endif()
 set(EXECUTABLE_OUTPUT_PATH ..)
 
 # Install to project root
-install(TARGETS helloworld DESTINATION ${helloworld_SOURCE_DIR})
+install(TARGETS asst1 DESTINATION ${asst1_SOURCE_DIR})

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(helloworld)
+project(asst1)
 
 #-------------------------------------------------------------------------------
 # Settings
@@ -189,4 +189,4 @@ if(BUILD_DOCS)
 endif()
 
 # Install settings
-set(CMAKE_INSTALL_PREFIX "${helloworld_SOURCE_DIR}/")
+set(CMAKE_INSTALL_PREFIX "${asst1_SOURCE_DIR}/")

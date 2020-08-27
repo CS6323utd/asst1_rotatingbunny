@@ -34,7 +34,7 @@ When you have successfully built your code, you will get an executable named **h
 To run your executable file:
 ```
 # under build folder
-$ ./helloworld
+$ ./asst1
 ```
 
 When you first run the application, you will see a bunny on a plane with axis on GUI.
