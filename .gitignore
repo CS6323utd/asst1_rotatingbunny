@@ -1,0 +1,12 @@
+# Extern
+/extern/*
+
+# Build
+*build*/*
+
+# Useless files
+.DS_STORE
+*.swp
+.idea/*
+.vscode/
+/data
