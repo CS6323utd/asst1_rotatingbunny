@@ -61,8 +61,7 @@ public:
 		float far_ = 100.0f,
 		unsigned int width_ = 1600,
 		unsigned int height_ = 900
-		)
-	{
+	) {
 		this->ori_position = position_;
 		this->ori_front = front_;
 		this->ori_up = up_;
@@ -87,8 +86,7 @@ public:
 		this->zoom = ori_zoom;
 	}
 
-	void process_keyboard(Camera_Movement direction, GLfloat delta_time)
-	{
+	void process_keyboard(Camera_Movement direction, GLfloat delta_time) {
 		GLfloat velocity = delta_time;
 		if (direction == FORWARD)
 			this->position += this->front * velocity;
@@ -117,8 +115,7 @@ public:
 	}
 
 	// Rotate specific angle along local camera system(LCS)
-	void rotate_x(GLfloat angle) 
-	{
+	void rotate_x(GLfloat angle) {
 		glm::vec3 up = this->up;
 		glm::mat4 rotation_mat(1);
 		rotation_mat = glm::rotate(rotation_mat, angle, this->right);
@@ -126,8 +123,7 @@ public:
 		this->front = glm::normalize(glm::cross(this->up, this->right));
 	}
 
-	void rotate_y(GLfloat angle) 
-	{
+	void rotate_y(GLfloat angle) {
 		glm::vec3 front = this->front;
 		glm::mat4 rotation_mat(1);
 		rotation_mat = glm::rotate(rotation_mat, angle, this->up);
@@ -135,8 +131,7 @@ public:
 		this->right = glm::normalize(glm::cross(this->front, this->up));
 	}
 
-	void rotate_z(GLfloat angle) 
-	{
+	void rotate_z(GLfloat angle) {
 		glm::vec3 right = this->right;
 		glm::mat4 rotation_mat(1);
 		rotation_mat = glm::rotate(rotation_mat, angle, this->front);
@@ -145,15 +140,13 @@ public:
 	}
 
 	// Get camera view matrix
-	glm::mat4 get_view_mat()
-	{
+	glm::mat4 get_view_mat() {
 		this->view_mat = glm::lookAt(this->position, this->position + this->front, this->up);
 		return this->view_mat;
 	}
 
 	// Get camera projection matrix
-	glm::mat4 get_projection_mat()
-	{
+	glm::mat4 get_projection_mat() {
 		this->proj_mat = glm::perspective(this->zoom, (GLfloat)this->width / (GLfloat)this->height, this->near, this->far);
 		return this->proj_mat;
 	}

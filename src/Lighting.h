@@ -43,8 +43,7 @@ public:
 
 	~Lighting() {}
 
-	void init() 
-	{
+	void init() {
 		direction_light.status = true;
 		direction_light.direction = glm::vec3(0.0f, -1.0f, 0.0f);
 		direction_light.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);

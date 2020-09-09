@@ -10,17 +10,10 @@ nanogui::Screen* Renderer::m_nanogui_screen = nullptr;
 
 bool Renderer::keys[1024];
 
-Renderer::Renderer()
-{
-}
+Renderer::Renderer() {}
+Renderer::~Renderer() {}
 
-
-Renderer::~Renderer()
-{	
-}
-
-void Renderer::nanogui_init(GLFWwindow* window)
-{
+void Renderer::nanogui_init(GLFWwindow* window) {
 	m_nanogui_screen = new nanogui::Screen();
 	m_nanogui_screen->initialize(window, true);
 
@@ -32,77 +25,69 @@ void Renderer::nanogui_init(GLFWwindow* window)
 	// Create nanogui gui
 	nanogui::FormHelper *gui_1 = new nanogui::FormHelper(m_nanogui_screen);
 	nanogui::ref<nanogui::Window> nanoguiWindow_1 = gui_1->addWindow(Eigen::Vector2i(0, 0), "Nanogui control bar_1");
-
-	//screen->setPosition(Eigen::Vector2i(-width/2 + 200, -height/2 + 300));
-
 	gui_1->addGroup("Camera Position");
 	gui_1->addVariable("X", m_camera->position[0])->setSpinnable(true);
 	gui_1->addVariable("Y", m_camera->position[1])->setSpinnable(true);
 	gui_1->addVariable("Z", m_camera->position[2])->setSpinnable(true);
-
 	gui_1->addButton("Reset Camera", []() {
 		m_camera->reset();
 	});
 
+	//////////
+	// Task 4: Create user-interaction controls here
+	// Allow users to interactively rotate the bunny around 
+	// the global y-axis of world coordinate system (WCS) 
+	// and rotate around its own x-axis of local coordinate system (LCS).
+
+
+	//////////
+	// Task 5: Reset
+	// Have a “Reset” button that can reset the bunny to the initial state
+
 	m_nanogui_screen->setVisible(true);
 	m_nanogui_screen->performLayout();
-
 	glfwSetCursorPosCallback(window,
 		[](GLFWwindow *window, double x, double y) {
 		m_nanogui_screen->cursorPosCallbackEvent(x, y);
 	}
 	);
-
 	glfwSetMouseButtonCallback(window,
 		[](GLFWwindow *, int button, int action, int modifiers) {
-		m_nanogui_screen->mouseButtonCallbackEvent(button, action, modifiers);
-	}
+			m_nanogui_screen->mouseButtonCallbackEvent(button, action, modifiers);
+		}
 	);
-
 	glfwSetKeyCallback(window,
 		[](GLFWwindow *window, int key, int scancode, int action, int mods) {
 		//screen->keyCallbackEvent(key, scancode, action, mods);
-
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, GL_TRUE);
-		if (key >= 0 && key < 1024)
-		{
+		if (key >= 0 && key < 1024) {
 			if (action == GLFW_PRESS)
 				keys[key] = true;
 			else if (action == GLFW_RELEASE)
 				keys[key] = false;
 		}
-	}
-	);
-
+	});
 	glfwSetCharCallback(window,
 		[](GLFWwindow *, unsigned int codepoint) {
 		m_nanogui_screen->charCallbackEvent(codepoint);
-	}
-	);
-
+	});
 	glfwSetDropCallback(window,
 		[](GLFWwindow *, int count, const char **filenames) {
 		m_nanogui_screen->dropCallbackEvent(count, filenames);
-	}
-	);
-
+	});
 	glfwSetScrollCallback(window,
 		[](GLFWwindow *, double x, double y) {
 		m_nanogui_screen->scrollCallbackEvent(x, y);
 		//m_camera->ProcessMouseScroll(y);
-	}
-	);
-
+	});
 	glfwSetFramebufferSizeCallback(window,
 		[](GLFWwindow *, int width, int height) {
 		m_nanogui_screen->resizeCallbackEvent(width, height);
-	}
-	);
+	});
 }
 
-void Renderer::init()
-{
+void Renderer::init() {
 	glfwInit();
 
 	// Set all the required options for GLFW
@@ -131,14 +116,12 @@ void Renderer::init()
 	nanogui_init(this->m_window);
 }
 
-void Renderer::display(GLFWwindow* window)
-{
+void Renderer::display(GLFWwindow* window) {
 	// TODO: replace hard-coded path!!!!
 	Shader m_shader = Shader("../src/shader/basic.vert", "../src/shader/basic.frag");
 
 	// Main frame while loop
-	while (!glfwWindowShouldClose(window))
-	{
+	while (!glfwWindowShouldClose(window)) {
 
 		glfwPollEvents();
 
@@ -166,14 +149,12 @@ void Renderer::display(GLFWwindow* window)
 	return;
 }
 
-void Renderer::run()
-{
+void Renderer::run() {
 	init();
 	display(this->m_window);
 }
 
-void Renderer::load_models()
-{
+void Renderer::load_models() {
 	// TODO: replace hard-coded path!!!!
 	obj_list.clear();
 	Object main_object("../src/objs/bunny.obj");
@@ -197,8 +178,7 @@ void Renderer::load_models()
 	obj_list.push_back(arrow_object);
 }
 
-void Renderer::draw_scene(Shader& shader)
-{
+void Renderer::draw_scene(Shader& shader) {
 	// Set up some basic parameters
 	glClearColor(background_color[0], background_color[1], background_color[2], background_color[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -211,11 +191,9 @@ void Renderer::draw_scene(Shader& shader)
 
 	glFrontFace(GL_CW);
 
-	for (size_t i = 0; i < obj_list.size(); i++)
-	{
+	for (size_t i = 0; i < obj_list.size(); i++) {
 
-		if (obj_list[i].obj_name == "main_object")
-		{
+		if (obj_list[i].obj_name == "main_object") {
 			// Before draw the model, change its model mat
 			glm::mat4 main_object_model_mat =  glm::mat4(1.0f);
 
@@ -229,8 +207,7 @@ void Renderer::draw_scene(Shader& shader)
 			draw_object(shader,obj_list[i]);
 		}
 
-		if (obj_list[i].obj_name == "plane")
-		{
+		if (obj_list[i].obj_name == "plane") {
 			// Draw plane
 			glm::mat4 plane_model_mat =  glm::mat4(1.0f);
 			glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, glm::value_ptr(plane_model_mat));
@@ -238,8 +215,7 @@ void Renderer::draw_scene(Shader& shader)
 			draw_object(shader, obj_list[i]);
 		}
 
-		if (obj_list[i].obj_name == "axis_arrow")
-		{
+		if (obj_list[i].obj_name == "axis_arrow") {
 			// Draw three axis
 			glm::mat4 model_mat_x = glm::mat4(1.0f);
 			glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, glm::value_ptr(model_mat_x));
@@ -264,8 +240,7 @@ void Renderer::draw_scene(Shader& shader)
 	}
 }
 
-void Renderer::camera_move()
-{
+void Renderer::camera_move() {
 	GLfloat current_frame = glfwGetTime();
 	delta_time = current_frame - last_frame;
 	last_frame = current_frame;
@@ -296,8 +271,7 @@ void Renderer::camera_move()
 		m_camera->process_keyboard(ROTATE_Z_DOWN, delta_time);
 }
 
-void Renderer::draw_object(Shader& shader, Object& object)
-{
+void Renderer::draw_object(Shader& shader, Object& object) {
 	glBindVertexArray(object.vao);
 
 	glUniform3f(glGetUniformLocation(shader.program, "m_object.object_color"), object.obj_color[0], object.obj_color[1], object.obj_color[2]);
@@ -308,8 +282,7 @@ void Renderer::draw_object(Shader& shader, Object& object)
 	glBindVertexArray(0);
 }
 
-void Renderer::bind_vaovbo(Object &cur_obj)
-{
+void Renderer::bind_vaovbo(Object &cur_obj) {
 	glGenVertexArrays(1, &cur_obj.vao);
 	glGenBuffers(1, &cur_obj.vbo);
 
@@ -331,8 +304,7 @@ void Renderer::bind_vaovbo(Object &cur_obj)
 	glBindVertexArray(0);
 }
 
-void Renderer::setup_uniform_values(Shader& shader)
-{
+void Renderer::setup_uniform_values(Shader& shader) {
 	// Camera uniform values
 	glUniform3f(glGetUniformLocation(shader.program, "camera_pos"), m_camera->position.x, m_camera->position.y, m_camera->position.z);
 
@@ -357,8 +329,7 @@ void Renderer::setup_uniform_values(Shader& shader)
 	glUniform1f(glGetUniformLocation(shader.program, "point_light.quadratic"), m_lightings->point_light.quadratic);
 }
 
-void Renderer::scean_reset()
-{
+void Renderer::scean_reset() {
 	load_models();
 	m_camera->reset();
 }

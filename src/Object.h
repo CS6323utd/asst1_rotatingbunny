@@ -11,8 +11,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class Object
-{
+class Object {
 public:
 	struct Vertex {
 		// Position
@@ -56,8 +55,7 @@ public:
 	GLuint vao, vbo;
 
 public:
-	void load_obj(std::string obj_path)
-	{
+	void load_obj(std::string obj_path) {
 		int path_str_length = obj_path.size();
 		std::string suffix = obj_path.substr(path_str_length - 3, path_str_length);
 
@@ -149,8 +147,7 @@ public:
 		}
 	};
 
-	void calculate_center()
-	{
+	void calculate_center() {
 		glm::vec3 max_bound(INT_MIN);
 		glm::vec3 min_bound(INT_MAX);
 		for (auto vertex : this->vao_vertices) {
